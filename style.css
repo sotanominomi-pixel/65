@@ -1,0 +1,160 @@
+/* 基本設定 */
+body {
+    background-color: #000; /* 黒背景 */
+    color: #fff; /* 白文字 */
+    font-family: -apple-system, sans-serif; /* iOS風フォント */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: block; /* 全画面表示のために修正 */
+}
+
+.n-clock-app {
+    width: 100%;
+    max-width: 500px; /* スマホ画面を想定 */
+    height: 100vh; /* 画面の高さ全体 */
+    margin: 0 auto; /* 中央寄せ */
+    display: flex;
+    flex-direction: column;
+}
+
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    padding-bottom: 70px; /* ナビゲーションと被らないように調整 */
+}
+
+/* 底部タブバーのデザイン (修正: 画面下部に固定) */
+.tab-bar {
+    position: fixed; /* 画面下部に固定 */
+    bottom: 0;
+    width: 100%;
+    max-width: 500px; /* アプリの最大幅に合わせる */
+    z-index: 10;
+    
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0; 
+    border-top: 1px solid #333; 
+    background-color: #1c1c1e;
+    font-weight: 500;
+}
+
+.tab-item {
+    background: none;
+    border: none;
+    color: #8e8e93; /* 非アクティブ */
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    font-size: 14px;
+}
+
+.tab-item.active {
+    color: #fff; /* アクティブ */
+}
+
+/* 時計モードの表示 */
+.mode-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.clock-display {
+    font-size: 80px;
+    text-align: center;
+    margin: 40px 0;
+    font-weight: 200;
+}
+
+/* 設定リストのスタイル */
+.settings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #1c1c1e; 
+    border-radius: 10px;
+}
+
+.settings-list li {
+    padding: 15px;
+    display: flow-root; 
+    border-bottom: 1px solid #333;
+}
+.settings-list li:last-child {
+    border-bottom: none;
+}
+
+/* iOS風トグルスイッチの基本スタイル */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 31px;
+    float: right; 
+}
+
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #333; transition: 0.4s; border-radius: 34px;
+}
+.slider:before {
+    position: absolute; content: ""; height: 27px; width: 27px; left: 2px; bottom: 2px;
+    background-color: white; transition: 0.4s; border-radius: 50%;
+}
+input:checked + .slider { background-color: #fff; }
+input:checked + .slider:before { transform: translateX(20px); background-color: #000; }
+
+/* セグメントコントロールのスタイル */
+.segmented-control {
+    float: right;
+    display: flex;
+    border: 1px solid #fff; 
+    border-radius: 8px;
+    overflow: hidden;
+    height: 30px;
+}
+.segment-button {
+    background-color: transparent; color: #fff; border: none; padding: 0 10px;
+    cursor: pointer; transition: background-color 0.2s, color 0.2s; font-size: 14px;
+    line-height: 30px;
+}
+.segment-button:not(:last-child) { border-right: 1px solid #fff; }
+.segment-button.active { background-color: #fff; color: #000; }
+
+/* ストップウォッチのボタンデザイン (モノトーンシンプル) */
+.stopwatch-controls {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+}
+.control-button {
+    width: 120px; height: 120px; border-radius: 50%; 
+    font-size: 16px; font-weight: bold; cursor: pointer; border: none;
+    background-color: #333; color: #fff; transition: background-color 0.2s;
+}
+/* スタート/ストップの区別を色で表現せず、コントラストで表現 */
+.control-button.start {
+    /* スタート時も控えめな色 */
+    background-color: #1a1a1a; 
+    color: #fff;
+}
+.control-button.stop {
+    /* ストップボタンをやや目立たせる */
+    background-color: #fff;
+    color: #000;
+}
+/* ラップ/リセットボタン */
+.control-button.gray-btn {
+    background-color: #333;
+    color: #fff;
+}
+
+.lap-list { list-style: none; padding: 0 10px; margin-top: 20px; }
+.lap-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333; font-size: 16px; }
